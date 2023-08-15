@@ -1,5 +1,5 @@
 ---
-title: Modelling Busines Processes in Laravel
+title: Modelling Business Processes in Laravel
 pubDate: 2023-03-24T14:27:16.845Z
 description: >-
     As developers, we often map business processes to digital processes, from sending an email to something quite complex. Let's look at how we can clean this up.
