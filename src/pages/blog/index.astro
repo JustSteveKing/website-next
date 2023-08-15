@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+import Site from './../../layouts/Site.astro'
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+<Site title="Blog Posts" description="My blog posts"}>
+    {posts.map((post) => (
+        <p>{post.data.title}</p>
+    ))}
+</Site>

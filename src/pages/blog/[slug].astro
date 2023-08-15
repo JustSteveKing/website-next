@@ -1,0 +1,35 @@
+---
+import { CollectionEntry, getCollection } from 'astro:content';
+import { Image } from 'astro:assets'
+import Site from '../../layouts/Site.astro';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.slug },
+		props: post,
+	}));
+}
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content } = await post.render();
+---
+<Site title={post.title} description={post.data.description}>
+	<article>
+		<div class="max-w-full py-4">
+			<h3>{post.title}</h3>
+			<Image
+				transition:name={`post-image-${post.id}`}
+				src={post.data.image}
+				alt="image"
+				height={640}
+				width={1248}
+				format="avif"
+			/>
+		</div>
+		<div class="prose max-w-full">
+			<Content />
+		</div>
+	</article>
+</Site>
